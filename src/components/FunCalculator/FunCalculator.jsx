@@ -10,14 +10,14 @@ function FunCalculator() {
 
   //generate random number for meme object ❎
   const randomIndex = Math.floor(Math.random() * 10);
-
   const handleButtonClick = (value) => {
+   
     if (value === "=") {
       setIsLoading(true);
       switch (input) {
         // Make API call for Joke api (😎)
         case "112":
-          fetch("https://v2.jokeapi.dev/joke/Any?lang=en")
+          fetch(import.meta.env.VITE_API_URL_Jokes)
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
@@ -37,11 +37,11 @@ function FunCalculator() {
 
         // Make API call for meme api (😎)
         case "172":
-          fetch("https://api.imgflip.com/get_memes")
+          fetch(import.meta.env.VITE_API_URL_Memes)
             .then((response) => response.json())
             .then((data) => {
               setApiResult(data.data.memes[randomIndex].name);
-              console.log(data)
+              console.log(data);
               if (data.data.memes[randomIndex].name) {
                 setInput(data.data.memes[randomIndex].name);
               }
@@ -57,7 +57,7 @@ function FunCalculator() {
 
         // Make API call for Movies api (📹)
         case "753":
-          fetch("https://www.omdbapi.com/?i=tt3896198&apikey=505f0bcf")
+          fetch(import.meta.env.VITE_API_URL_Movie)
             .then((response) => response.json())
             .then((data) => {
               setApiResult(data.Title);
@@ -78,7 +78,7 @@ function FunCalculator() {
       }
     } else if (value === "C") {
       setInput("");
-       setIsLoading(false);
+      setIsLoading(false);
       setApiResult(null);
     } else {
       setInput(input + value);
