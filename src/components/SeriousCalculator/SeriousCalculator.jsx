@@ -7,7 +7,8 @@ function SeriousCalculator() {
   const handleButtonClick = (value) => {
     if (value === "=") {
       try {
-        setInput(eval(input).toString());
+        const result = new Function(`return ${input}`)();
+        setInput(result.toString());
       } catch (error) {
         setInput("Error");
       }
